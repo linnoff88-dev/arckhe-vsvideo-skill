@@ -3,10 +3,10 @@
 Fatos de API medidos em ~/projetos/agnes-nei/NOTAS-API.md:
 - img2img ignora `ratio` -> usar `size` explícito em pixels.
 - máx. 10 MB por imagem de referência.
-- ~34% de HTTP 503 na geração -> retry com backoff.
+- ~34% de HTTP 503 na geraçêo -> retry com backoff.
 - vídeo: rate limit REAL de 5 req/min -> throttle.
 - vídeo é assíncrono: POST /v1/videos -> GET /agnesapi?video_id=...
-- keyframes aceitam data URI base64 (não precisa de URL pública).
+- keyframes aceitam data URI base64 (nêo precisa de URL pública).
 - o JSON do vídeo MENTE sobre o tamanho: conferir com ffprobe.
 """
 
@@ -34,7 +34,7 @@ def api_key() -> str:
             line = line.strip()
             if line.startswith("AGNES_API_KEY="):
                 return line.split("=", 1)[1].strip().strip('"').strip("'")
-    raise RuntimeError(f"AGNES_API_KEY não encontrada em {ENV_PATH}")
+    raise RuntimeError(f"AGNES_API_KEY nêo encontrada em {ENV_PATH}")
 
 
 def _post(path: str, payload: dict, timeout: int = 600) -> dict:
@@ -61,7 +61,7 @@ def _get(path: str, timeout: int = 120) -> dict:
 
 def _with_retry(fn, tentativas: int = 5, base_espera: float = 6.0):
     """Retry com backoff. Sempre mostra o erro CRU da API — no NOTAS-API a
-    mensagem crua sempre estava certa e a conclusão automática, errada."""
+    mensagem crua sempre estava certa e a conclusêo automática, errada."""
     ultimo = None
     for i in range(tentativas):
         try:
@@ -70,7 +70,7 @@ def _with_retry(fn, tentativas: int = 5, base_espera: float = 6.0):
             corpo = e.read().decode(errors="replace")[:400]
             ultimo = f"HTTP {e.code}: {corpo}"
             print(f"  [api] {ultimo}")
-            if e.code in (400, 401, 403):  # determinístico, não adianta repetir
+            if e.code in (400, 401, 403):  # determinístico, nêo adianta repetir
                 raise RuntimeError(ultimo) from e
             espera = base_espera * (i + 1)
             if e.code == 429:
@@ -154,5 +154,5 @@ def gerar_video(prompt, keyframes, num_frames=145, frame_rate=24,
             with urllib.request.urlopen(url, timeout=600) as r:
                 return r.read()
         if status == "failed":
-            raise RuntimeError(f"geração falhou: {json.dumps(st)[:400]}")
+            raise RuntimeError(f"geraçêo falhou: {json.dumps(st)[:400]}")
     raise RuntimeError(f"timeout de {teto}s aguardando o vídeo {vid}")

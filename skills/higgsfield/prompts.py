@@ -35,7 +35,7 @@ VIDEO_SEEDANCE = (
 )
 
 # Reescrito para o Agnes (ver PLANO-AGNES.md, risco R3): o modelo é forte em
-# AMBIENTE e fraco em PERSONAGEM, então a transformação do ambiente é o assunto
+# AMBIENTE e fraco em PERSONAGEM, entêo a transformaçêo do ambiente é o assunto
 # e os operários ficam em segundo plano, borrados pelo movimento — que é
 # exatamente o visual de um time-lapse real de obra.
 VIDEO = (

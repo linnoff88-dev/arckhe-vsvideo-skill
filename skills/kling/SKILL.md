@@ -1,48 +1,48 @@
 ---
 name: kling
-description: Vídeo de reforma (virtual staging) a partir de UMA imagem de interior pronto, usando o Kling AI para as duas etapas — imagem "antes da obra" com image_to_image (kling-image-o1) e time-lapse antes→depois com image_to_video usando --tailImage. Use quando pedirem o vídeo de reforma "pelo Kling", "com Kling AI", ou quando quiserem a melhor fidelidade de edição e aceitarem gastar créditos. Para a versão sem custo use agnes; para GPT Image + Higgsfield use higgsfield.
+description: Vídeo de reforma (virtual staging) a partir de UMA imagem de interior pronto, usando o Kling AI para as duas etapas — imagem "antes da obra" com image_to_image (kling-image-o1) e time-lapse antes→depois com image_to_video usando --tailImage. Use quando pedirem o vídeo de reforma "pelo Kling", "com Kling AI", ou quando quiserem a melhor fidelidade de ediçêo e aceitarem gastar créditos. Para a versêo sem custo use agnes; para GPT Image + Higgsfield use higgsfield.
 ---
 
 # Virtual Staging Video — Kling AI
 
 Sistema independente em `skills/kling/` — `rodar.py` + `prompts.py` próprios, sobre o
-CLI `kling` (repo `klingaimcp`). Mexer aqui não afeta `agnes/` nem `higgsfield/`.
+CLI `kling` (repo `klingaimcp`). Mexer aqui nêo afeta `agnes/` nem `higgsfield/`.
 
-> ⚠️ **Toda submissão é cobrada em créditos** da conta Pro/SVIP e **não cancela**.
-> O script não envia nada sem `--sim`. Nunca submeta job de teste às cegas; confirme os
+> ⚠️ **Toda submissêo é cobrada em créditos** da conta Pro/SVIP e **nêo cancela**.
+> O script nêo envia nada sem `--sim`. Nunca submeta job de teste às cegas; confirme os
 > modelos com o usuário antes.
 
 ## Por que Kling aqui
 
 - `image_to_video` aceita **`--tailImage`** — o par A→B nativo, exatamente o "antes/depois".
-- `image_to_image` tem o **`kling-image-o1`** ("consistência de features, edição precisa"),
+- `image_to_image` tem o **`kling-image-o1`** ("consistência de features, ediçêo precisa"),
   que é o modelo que mais se aproxima de *editar* o ambiente em vez de reinterpretá-lo —
   o ponto fraco do Agnes (ver `doc/PLANO-AGNES.md`, risco R1).
 - O mesmo CLI ainda expõe `gpt-image2`, `gemini-3-pro-image` e outros como modelo de imagem.
 
 ## Duas portas para a mesma conta
 
-| Porta | Autenticação | Quando usar |
+| Porta | Autenticaçêo | Quando usar |
 |---|---|---|
 | **CLI `kling`** (default) | token em `~/.kling/.credentials` (`kling login`, OAuth) | scriptável — é o que o `kling/rodar.py` usa; funciona headless |
 | **MCP `klingai`** | OAuth do kling.ai (`https://kling.ai/mcp`) | no chat, quando você quiser disparar pelas ferramentas do agente |
 
-O `.mcp.json` do repo já declara o `klingai`; ao abrir a sessão neste projeto, confirme com
-`/mcp` (pode pedir reautorização). **Não há chave de API em `.env`** — nem no `wifi` nem no
+O `.mcp.json` do repo já declara o `klingai`; ao abrir a sessêo neste projeto, confirme com
+`/mcp` (pode pedir reautorizaçêo). **Nêo há chave de API em `.env`** — nem no `wifi` nem no
 `openpcbot`; as duas portas usam login OAuth da mesma conta Pro/SVIP.
 
-⚠️ MCP com autenticação interativa costuma **não** estar disponível em execução headless/cron.
-Para automação, use o CLI.
+⚠️ MCP com autenticaçêo interativa costuma **nêo** estar disponível em execuçêo headless/cron.
+Para automaçêo, use o CLI.
 
 ## Como rodar
 
 ```bash
-python3 skills/kling/rodar.py --so-imagem --sim   # etapa 1 (portão de consistência)
+python3 skills/kling/rodar.py --so-imagem --sim   # etapa 1 (portêo de consistência)
 python3 skills/kling/rodar.py --so-video  --sim   # etapa 2, reusando o "antes" aprovado
 python3 skills/kling/rodar.py --sim               # as duas
 ```
 
-Sem `--sim` o script só imprime a configuração e sai com código 2 — é o freio de crédito.
+Sem `--sim` o script só imprime a configuraçêo e sai com código 2 — é o freio de crédito.
 
 | Flag | Default | Opções |
 |---|---|---|
@@ -66,7 +66,7 @@ Sem `--sim` o script só imprime a configuração e sai com código 2 — é o f
   O script sobe para 1080p sozinho e avisa — contraria o default 720p do `klingai-nei`, mas é
   a API que exige.
 - ⚠️ **Marca d'água "KlingAI"** em todas as imagens e em todos os frames do vídeo. É do
-  serviço, não do modelo — resolver no plano/conta ou cortar. **Inviabiliza entrega a cliente
+  serviço, nêo do modelo — resolver no plano/conta ou cortar. **Inviabiliza entrega a cliente
   como está.**
 
 Se o "antes" trocar a arquitetura, repita descrevendo o layout real:
@@ -79,19 +79,19 @@ LAYOUT="one large window on the whole left wall, blank back wall with no opening
 ## Regras do motor
 
 - **Resposta bruta gravada antes de qualquer parse**, em `output/kling-respostas/` — job pago
-  não cancela e ID perdido é crédito perdido (regra do `klingai-nei`).
+  nêo cancela e ID perdido é crédito perdido (regra do `klingai-nei`).
 - O resultado sai em **`works[].url`**; se o submit só devolver `generation_id`, o script faz
   poll em `kling query_tasks <id>`.
 - **As URLs expiram em 24 h** — o script baixa na hora. Se o download falhar, recupere com
   `kling query_tasks <generation_id>` (o arquivo bruto guarda o id).
-- Se o script não achar a URL do resultado, ele **não resubmete**: manda você abrir o arquivo
-  bruto e baixar à mão. Resubmeter às cegas gasta crédito de novo.
+- Se o script nêo achar a URL do resultado, ele **nêo resubmete**: manda você abrir o arquivo
+  bruto e baixar à mêo. Resubmeter às cegas gasta crédito de novo.
 - **Prompts em inglês** (compartilhados com as outras skills, em `agnes/prompts.py`); o de
   vídeo usado aqui é o `VIDEO_SEEDANCE`, com os operários em primeiro plano.
-- Conferir o MP4 com `ffprobe` (o script já faz), não o JSON da resposta.
+- Conferir o MP4 com `ffprobe` (o script já faz), nêo o JSON da resposta.
 
-## Portão de consistência
+## Portêo de consistência
 
 Antes de gastar crédito no vídeo, compare "antes" e "depois": mesma câmera, mesmas paredes,
-mesmas aberturas, mesmo pé-direito. Se o layout mudou, regenere a imagem — não leve um
+mesmas aberturas, mesmo pé-direito. Se o layout mudou, regenere a imagem — nêo leve um
 "antes" errado para a etapa cara.

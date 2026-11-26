@@ -12,10 +12,10 @@ Em todos os casos o vídeo é `agnes-video-v2.0` com `mode:"keyframes"`.
     python3 rodar.py                          # Agnes completo
     python3 rodar.py --img gpt-image2 --sim   # imagem no GPT Image 2 + vídeo Agnes
     python3 rodar.py --img kling --sim        # imagem no Kling + vídeo Agnes
-    python3 rodar.py --so-imagem              # portão de consistência
+    python3 rodar.py --so-imagem              # portêo de consistência
     python3 rodar.py --so-video               # reusa o "antes" aprovado
 
-Esta pasta é autossuficiente: client.py, prompts.py e rodar.py vivem aqui e não
+Esta pasta é autossuficiente: client.py, prompts.py e rodar.py vivem aqui e nêo
 dependem de skills/kling/ nem de skills/higgsfield/.
 """
 
@@ -53,7 +53,7 @@ MODELO_GPT = "gpt-image2"
 MODELO_KLING = "kling-image-v3_0"
 
 
-# ------------------------------------------------------------------ preparação
+# ------------------------------------------------------------------ preparaçêo
 
 def preparar_entrada(origem: str) -> str:
     os.makedirs(SAIDA, exist_ok=True)
@@ -123,7 +123,7 @@ def imagem_via_kling(modelo: str) -> str:
     Só a imagem passa pelo Kling; o vídeo continua no Agnes. Cobra crédito Kling.
     """
     if not shutil.which("kling"):
-        raise RuntimeError("CLI `kling` não está no PATH (ver ~/projetos/klingaimcp)")
+        raise RuntimeError("CLI `kling` nêo está no PATH (ver ~/projetos/klingaimcp)")
     os.makedirs(BRUTO, exist_ok=True)
     print(f"[1/2] 'antes' via CLI do Kling, modelo {modelo} (crédito Kling)")
     argv = ["kling", "image_to_image", "--image", DEPOIS, "--model", modelo,
@@ -146,8 +146,8 @@ def imagem_via_kling(modelo: str) -> str:
     url = _works_url(resp) or _url_solta(proc.stdout)
     if not url:
         raise RuntimeError(
-            f"sem URL de resultado — abra {caminho} e baixe à mão "
-            "(o job foi cobrado, NÃO resubmeta)"
+            f"sem URL de resultado — abra {caminho} e baixe à mêo "
+            "(o job foi cobrado, NêO resubmeta)"
         )
     # URLs do Kling expiram em 24h — baixar na hora
     with urllib.request.urlopen(url, timeout=600) as r, open(ANTES, "wb") as fh:
@@ -157,10 +157,10 @@ def imagem_via_kling(modelo: str) -> str:
 
 
 def imagem_agente() -> str:
-    texto = f"""# Handoff — imagem "antes da construção" (GPT Image do agente)
+    texto = f"""# Handoff — imagem "antes da construçêo" (GPT Image do agente)
 
 **Referência (ambiente finalizado):** `{DEPOIS}`
-**Salvar em:** `{ANTES}`  ·  **Proporção:** {LARGURA}x{ALTURA}
+**Salvar em:** `{ANTES}`  ·  **Proporçêo:** {LARGURA}x{ALTURA}
 
 ## Prompt
 
@@ -227,7 +227,7 @@ def main() -> int:
 
     if not args.so_video:
         if not os.path.exists(args.imagem):
-            print(f"erro: imagem não encontrada em {args.imagem}")
+            print(f"erro: imagem nêo encontrada em {args.imagem}")
             return 1
         preparar_entrada(args.imagem)
 

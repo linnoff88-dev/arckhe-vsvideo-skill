@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Sistema KLING — independente. Imagem e vídeo, os dois no Kling AI.
 
-Usa o CLI `kling` (repo klingaimcp). Diferente do Agnes, **toda submissão é
+Usa o CLI `kling` (repo klingaimcp). Diferente do Agnes, **toda submissêo é
 cobrada em créditos** da conta Pro/SVIP — por isso nada é enviado sem `--sim`.
 
     python3 rodar.py --so-imagem --sim
@@ -10,8 +10,8 @@ cobrada em créditos** da conta Pro/SVIP — por isso nada é enviado sem `--sim
 
 Esta pasta é autossuficiente: prompts.py e rodar.py vivem aqui.
 
-Defaults do Nei (klingai-nei/README.md): resolução 720p em toda geração; a
-resposta bruta de cada submit é gravada ANTES de qualquer parse — job pago não
+Defaults do Nei (klingai-nei/README.md): resoluçêo 720p em toda geraçêo; a
+resposta bruta de cada submit é gravada ANTES de qualquer parse — job pago nêo
 cancela, e ID perdido é crédito perdido.
 """
 
@@ -40,14 +40,14 @@ DEPOIS = os.path.join(SAIDA, "completed-interior.png")
 VIDEO = os.path.join(SAIDA, "renovation-video.mp4")
 
 # Medido em 2026-07-28: v3_0 foi o único dos três que manteve a janela e as
-# paredes cegas. o1 ("edição precisa") e v3_0_omni recriaram o ambiente.
+# paredes cegas. o1 ("ediçêo precisa") e v3_0_omni recriaram o ambiente.
 MODELO_IMG = "kling-image-v3_0"
 # kling-video-v2_5 aceita o par A->B via --tailImage e é o de melhor custo.
 MODELO_VIDEO = "kling-video-v2_5"
 
 
 def submeter(argv: list, rotulo: str, timeout: int) -> dict:
-    """Roda o CLI, GRAVA a resposta bruta e só então parseia."""
+    """Roda o CLI, GRAVA a resposta bruta e só entêo parseia."""
     os.makedirs(BRUTO, exist_ok=True)
     print(f"[kling] {rotulo}: {' '.join(argv[:6])} …")
     proc = subprocess.run(argv, capture_output=True, text=True, timeout=timeout)
@@ -95,8 +95,8 @@ def generation_id(resp: dict) -> str:
 def resultado(resp: dict, rotulo: str, teto: int = 900) -> str:
     """Pega a URL do submit; se só veio o generation_id, faz poll no query_tasks.
 
-    Nunca resubmete: job pago não cancela. Se não resolver, manda o usuário
-    abrir a resposta bruta e baixar à mão.
+    Nunca resubmete: job pago nêo cancela. Se nêo resolver, manda o usuário
+    abrir a resposta bruta e baixar à mêo.
     """
     url = works_url(resp)
     if url:
@@ -105,7 +105,7 @@ def resultado(resp: dict, rotulo: str, teto: int = 900) -> str:
     if not gid:
         raise RuntimeError(
             "sem works[].url e sem generation_id — abra o arquivo bruto em "
-            f"{BRUTO} e baixe à mão (o job foi cobrado, NÃO resubmeta)"
+            f"{BRUTO} e baixe à mêo (o job foi cobrado, NêO resubmeta)"
         )
     print(f"[kling] generation_id={gid} — consultando query_tasks")
     inicio = time.time()
@@ -118,7 +118,7 @@ def resultado(resp: dict, rotulo: str, teto: int = 900) -> str:
             return url
     raise RuntimeError(
         f"timeout consultando {gid}. O job existe e foi cobrado — rode "
-        f"`kling query_tasks {gid}` e baixe manualmente. NÃO resubmeta."
+        f"`kling query_tasks {gid}` e baixe manualmente. NêO resubmeta."
     )
 
 
@@ -162,7 +162,7 @@ def etapa_video(modelo: str, duracao: str, resolucao: str) -> str:
     # A API recusa: "720p is not supported with a tail image". O par A->B exige
     # o tier 1080p (pro) — mais crédito que o default 720p do klingai-nei.
     if resolucao != "1080p":
-        print(f"[kling] ⚠️  {resolucao} não é aceito com tail image; subindo para "
+        print(f"[kling] ⚠️  {resolucao} nêo é aceito com tail image; subindo para "
               "1080p (tier pro, custa mais crédito)")
         resolucao = "1080p"
     resp = submeter(
@@ -207,19 +207,19 @@ def main() -> int:
     args = ap.parse_args()
 
     if not shutil.which("kling"):
-        print("erro: CLI `kling` não está no PATH (ver ~/projetos/klingaimcp)")
+        print("erro: CLI `kling` nêo está no PATH (ver ~/projetos/klingaimcp)")
         return 1
 
     print(f"[cfg] imagem={args.modelo_img} · vídeo={args.modelo_video} "
           f"· {args.duracao}s {args.resolucao}")
     if not args.sim:
-        print("\n⚠️  Toda submissão ao Kling É COBRADA em créditos e não cancela.")
+        print("\n⚠️  Toda submissêo ao Kling É COBRADA em créditos e nêo cancela.")
         print("    Reveja os modelos acima e repita com --sim para submeter.")
         return 2
 
     if not args.so_video:
         if not os.path.exists(args.imagem):
-            print(f"erro: imagem não encontrada em {args.imagem}")
+            print(f"erro: imagem nêo encontrada em {args.imagem}")
             return 1
         preparar_entrada(args.imagem)
         etapa_imagem(args.modelo_img, args.img_resolucao)

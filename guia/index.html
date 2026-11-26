@@ -126,10 +126,10 @@
 <section id="oque"><div class="wrap">
   <span class="chip">O que é</span>
   <h2>Virtual staging em vídeo, a partir de uma imagem só</h2>
-  <p class="sub">Um único arquivo <code>SKILL.md</code> orquestra o fluxo inteiro: análise da imagem, geração do "antes", checagem de consistência e render do vídeo. Sem mover arquivo entre ferramentas na mão.</p>
+  <p class="sub">Um único arquivo <code>SKILL.md</code> orquestra o fluxo inteiro: análise da imagem, geraçêo do "antes", checagem de consistência e render do vídeo. Sem mover arquivo entre ferramentas na mêo.</p>
   <div class="grid g3">
-    <div class="card"><h3>🖼️ Uma entrada só</h3><p>Basta a foto ou render do ambiente já finalizado. O "antes" é gerado — você não precisa ter a foto da obra.</p></div>
-    <div class="card"><h3>📐 Arquitetura travada</h3><p>Câmera, perspectiva, paredes, janelas e pé-direito são preservados. Só o estágio da obra e os acabamentos mudam.</p></div>
+    <div class="card"><h3>🖼️ Uma entrada só</h3><p>Basta a foto ou render do ambiente já finalizado. O "antes" é gerado — você nêo precisa ter a foto da obra.</p></div>
+    <div class="card"><h3>📐 Arquitetura travada</h3><p>Câmera, perspectiva, paredes, janelas e pé-direito sêo preservados. Só o estágio da obra e os acabamentos mudam.</p></div>
     <div class="card"><h3>🎬 Time-lapse realista</h3><p>Operários, poeira, obra em ritmo acelerado e o ambiente se completando — com câmera fixa do começo ao fim.</p></div>
   </div>
 </div></section>
@@ -137,7 +137,7 @@
 <section id="fluxo"><div class="wrap">
   <span class="chip">Como funciona</span>
   <h2>Do interior pronto ao MP4</h2>
-  <p class="sub">Quatro etapas encadeadas. A checagem de consistência é um portão: se o "antes" saiu com outro ângulo ou outro layout, a skill regenera antes de gastar uma geração de vídeo.</p>
+  <p class="sub">Quatro etapas encadeadas. A checagem de consistência é um portêo: se o "antes" saiu com outro ângulo ou outro layout, a skill regenera antes de gastar uma geraçêo de vídeo.</p>
   <div class="flow">
     <span>Imagem do interior</span><span class="arr">→</span>
     <span>Análise (câmera, arquitetura, materiais)</span><span class="arr">→</span>
@@ -147,20 +147,20 @@
     <span>renovation-video.mp4</span>
   </div>
   <div class="grid g3" style="margin-top:28px">
-    <div class="card"><span class="num">1</span><h3>Análise</h3><p>Tipo de ambiente, posição e altura da câmera, perspectiva, dimensões, aberturas, piso, mobiliário, materiais, direção da luz e estilo.</p></div>
-    <div class="card"><span class="num">2</span><h3>Geração do "antes"</h3><p>GPT Image devolve o mesmo ambiente como casca de obra: paredes de cimento, teto cru, piso nu, sem mobília nem acabamento.</p></div>
-    <div class="card"><span class="num">3</span><h3>Vídeo</h3><p>Higgsfield Seedance 2.0 Mini (via MCP) recebe o "antes" como <code>@image1</code> e o finalizado como <code>@image2</code> e gera a transformação.</p></div>
+    <div class="card"><span class="num">1</span><h3>Análise</h3><p>Tipo de ambiente, posiçêo e altura da câmera, perspectiva, dimensões, aberturas, piso, mobiliário, materiais, direçêo da luz e estilo.</p></div>
+    <div class="card"><span class="num">2</span><h3>Geraçêo do "antes"</h3><p>GPT Image devolve o mesmo ambiente como casca de obra: paredes de cimento, teto cru, piso nu, sem mobília nem acabamento.</p></div>
+    <div class="card"><span class="num">3</span><h3>Vídeo</h3><p>Higgsfield Seedance 2.0 Mini (via MCP) recebe o "antes" como <code>@image1</code> e o finalizado como <code>@image2</code> e gera a transformaçêo.</p></div>
   </div>
 </div></section>
 
 <section id="pre"><div class="wrap">
   <span class="chip">Pré-requisitos</span>
   <h2>O que precisa estar no lugar</h2>
-  <p class="sub">A skill não substitui gerador por conta própria: se o Higgsfield MCP não estiver disponível, ela para depois das imagens e avisa.</p>
+  <p class="sub">A skill nêo substitui gerador por conta própria: se o Higgsfield MCP nêo estiver disponível, ela para depois das imagens e avisa.</p>
   <div class="grid g3">
     <div class="card"><h3>🧠 Agente com skills</h3><p>Claude Code (ou Codex) lendo a pasta de skills do projeto.</p><pre><span class="c"># instalar a skill no seu agente</span>
 <span class="k">cp -r</span> skills/virtual-staging-video <span class="s">~/.claude/skills/</span></pre></div>
-    <div class="card"><h3>🖼️ GPT Image</h3><p>Acesso ao GPT Image para gerar a imagem "antes da construção".</p><pre><span class="c"># a skill chama o gerador de imagem do seu agente</span></pre></div>
+    <div class="card"><h3>🖼️ GPT Image</h3><p>Acesso ao GPT Image para gerar a imagem "antes da construçêo".</p><pre><span class="c"># a skill chama o gerador de imagem do seu agente</span></pre></div>
     <div class="card"><h3>🎥 Higgsfield MCP</h3><p>MCP do Higgsfield configurado, com o modelo Seedance 2.0 Mini disponível.</p><pre><span class="c"># confira que o MCP responde antes de rodar</span>
 <span class="k">/mcp</span></pre></div>
   </div>
@@ -199,7 +199,7 @@
 
   <div class="step"><div class="b">5</div><div>
     <h3>Confira o "antes" antes do vídeo</h3>
-    <p>Olhe <code>output/before-construction.png</code>: mesma câmera, mesmas paredes e aberturas. Se o layout mudou, peça para regenerar — a geração de vídeo é a etapa cara.</p>
+    <p>Olhe <code>output/before-construction.png</code>: mesma câmera, mesmas paredes e aberturas. Se o layout mudou, peça para regenerar — a geraçêo de vídeo é a etapa cara.</p>
 <pre><span class="s">&gt; o ângulo mudou, regenera o antes</span></pre>
   </div></div>
 
@@ -216,8 +216,8 @@ output/renovation-video.mp4      <span class="c"># o time-lapse</span></pre>
   <span class="chip">Roadmap</span>
   <h2>Onde está e para onde vai</h2>
   <p class="sub">O escopo atual é um ambiente por rodada, com um vídeo por par de imagens.</p>
-  <div class="phase"><div class="tag">Hoje</div><div class="d"><strong>Fluxo completo de um ambiente</strong><span>Análise, "antes" com GPT Image, portão de consistência e vídeo com Seedance 2.0 Mini.</span></div></div>
-  <div class="phase"><div class="tag">Próximo</div><div class="d"><strong>Lote de ambientes</strong><span>Vários cômodos de uma vez, com nomeação automática das saídas.</span></div></div>
+  <div class="phase"><div class="tag">Hoje</div><div class="d"><strong>Fluxo completo de um ambiente</strong><span>Análise, "antes" com GPT Image, portêo de consistência e vídeo com Seedance 2.0 Mini.</span></div></div>
+  <div class="phase"><div class="tag">Próximo</div><div class="d"><strong>Lote de ambientes</strong><span>Vários cômodos de uma vez, com nomeaçêo automática das saídas.</span></div></div>
   <div class="phase"><div class="tag">Depois</div><div class="d"><strong>Trilha e legendas</strong><span>Música e rótulos "antes / depois" costurados no MP4 final.</span></div></div>
 </div></section>
 

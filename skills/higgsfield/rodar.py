@@ -2,8 +2,8 @@
 """Sistema HIGGSFIELD — independente. Fluxo original: GPT Image na imagem,
 Higgsfield Seedance 2.0 Mini no vídeo.
 
-Nenhuma das duas etapas é HTTP: as duas são ferramentas do agente/MCP. Então
-este script NÃO gera nada — ele prepara os arquivos e escreve os handoffs com
+Nenhuma das duas etapas é HTTP: as duas sêo ferramentas do agente/MCP. Entêo
+este script NêO gera nada — ele prepara os arquivos e escreve os handoffs com
 prompt e caminhos prontos, e **o agente executa**.
 
     python3 rodar.py               # prepara os dois handoffs
@@ -48,21 +48,21 @@ def prompt_antes() -> str:
 
 
 def handoff_imagem() -> str:
-    texto = f"""# Handoff — imagem "antes da construção" (GPT Image)
+    texto = f"""# Handoff — imagem "antes da construçêo" (GPT Image)
 
-**Você**, agente, executa: o GPT Image é ferramenta sua, não endpoint HTTP.
+**Você**, agente, executa: o GPT Image é ferramenta sua, nêo endpoint HTTP.
 
 **Referência (ambiente finalizado):** `{DEPOIS}`
-**Salvar em:** `{ANTES}`  ·  **Proporção:** {LARGURA}x{ALTURA} (16:9)
+**Salvar em:** `{ANTES}`  ·  **Proporçêo:** {LARGURA}x{ALTURA} (16:9)
 
 ## Prompt
 
 {prompt_antes()}
 
-## Portão de consistência
+## Portêo de consistência
 
 Compare as duas: mesma câmera, mesmas paredes, mesmas aberturas, mesmo pé-direito.
-Se o layout mudou, **regenere** — não leve um "antes" errado para o vídeo.
+Se o layout mudou, **regenere** — nêo leve um "antes" errado para o vídeo.
 """
     with open(HANDOFF_IMG, "w", encoding="utf-8") as fh:
         fh.write(texto)
@@ -73,8 +73,8 @@ Se o layout mudou, **regenere** — não leve um "antes" errado para o vídeo.
 def handoff_video() -> str:
     texto = f"""# Handoff — vídeo de reforma (Higgsfield Seedance 2.0 Mini, via MCP)
 
-**Você**, agente, executa: o Higgsfield é MCP, não endpoint HTTP. Confirme antes
-com `/mcp` que ele está conectado — sem isso, **pare e avise**, não troque de
+**Você**, agente, executa: o Higgsfield é MCP, nêo endpoint HTTP. Confirme antes
+com `/mcp` que ele está conectado — sem isso, **pare e avise**, nêo troque de
 gerador por conta própria (para isso existem as skills `agnes` e `kling`).
 
 **@image1 (antes):** `{ANTES}`
@@ -87,7 +87,7 @@ gerador por conta própria (para isso existem as skills `agnes` e `kling`).
 
 ## Depois
 
-Confira o arquivo com `ffprobe` (dimensão e duração reais), não o JSON da resposta.
+Confira o arquivo com `ffprobe` (dimensêo e duraçêo reais), nêo o JSON da resposta.
 """
     with open(HANDOFF_VID, "w", encoding="utf-8") as fh:
         fh.write(texto)
@@ -105,7 +105,7 @@ def main() -> int:
     os.makedirs(SAIDA, exist_ok=True)
     if not args.so_video:
         if not os.path.exists(args.imagem):
-            print(f"erro: imagem não encontrada em {args.imagem}")
+            print(f"erro: imagem nêo encontrada em {args.imagem}")
             return 1
         shutil.copyfile(args.imagem, DEPOIS)
         print(f"[prep] depois -> {DEPOIS} ({os.path.getsize(DEPOIS) // 1024} KB)")
@@ -113,7 +113,7 @@ def main() -> int:
         if args.so_imagem:
             return 0
     handoff_video()
-    print("\nOs dois handoffs estão em output/. O agente executa a partir deles.")
+    print("\nOs dois handoffs estêo em output/. O agente executa a partir deles.")
     return 0
 
 

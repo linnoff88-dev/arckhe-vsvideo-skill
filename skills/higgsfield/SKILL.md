@@ -1,18 +1,18 @@
 ---
 name: higgsfield
-description: Vídeo de reforma (virtual staging) a partir de UMA imagem de interior pronto, pelo fluxo ORIGINAL — imagem "antes da obra" com GPT Image e time-lapse antes→depois com Higgsfield Seedance 2.0 Mini via MCP. Use quando pedirem o vídeo de reforma "pelo Higgsfield", "pelo Seedance", "com GPT Image", ou o "fluxo original". Para a versão sem custo use agnes; para a versão Kling use kling.
+description: Vídeo de reforma (virtual staging) a partir de UMA imagem de interior pronto, pelo fluxo ORIGINAL — imagem "antes da obra" com GPT Image e time-lapse antes→depois com Higgsfield Seedance 2.0 Mini via MCP. Use quando pedirem o vídeo de reforma "pelo Higgsfield", "pelo Seedance", "com GPT Image", ou o "fluxo original". Para a versêo sem custo use agnes; para a versêo Kling use kling.
 ---
 
 # Virtual Staging Video — fluxo original (GPT Image + Higgsfield)
 
 Este é o fluxo da spec original (`doc/SKILL.md`), preservado sem alterações de comportamento.
-Nenhuma etapa é HTTP: as duas usam **ferramentas do agente/MCP**, então **você** executa.
+Nenhuma etapa é HTTP: as duas usam **ferramentas do agente/MCP**, entêo **você** executa.
 
 ## Antes de começar
 
-Confira com `/mcp` que o **Higgsfield MCP** está conectado. **Se não estiver, pare e avise
-o usuário** — não substitua por outro gerador por conta própria (para isso existem as
-skills `agnes` e `kling`, e a troca é decisão do usuário).
+Confira com `/mcp` que o **Higgsfield MCP** está conectado. **Se nêo estiver, pare e avise
+o usuário** — nêo substitua por outro gerador por conta própria (para isso existem as
+skills `agnes` e `kling`, e a troca é decisêo do usuário).
 
 ## Arquivos
 
@@ -22,26 +22,26 @@ Saídas: `output/before-construction.png` · `output/completed-interior.png` · 
 ## Workflow
 
 1. Localize a imagem do interior finalizado.
-2. Analise: tipo de ambiente, posição e altura da câmera, perspectiva, dimensões, paredes,
-   janelas, portas e aberturas, pé-direito, piso, mobiliário, embutidos, materiais, direção
+2. Analise: tipo de ambiente, posiçêo e altura da câmera, perspectiva, dimensões, paredes,
+   janelas, portas e aberturas, pé-direito, piso, mobiliário, embutidos, materiais, direçêo
    da luz e estilo.
 3. Trate a imagem enviada como a referência **depois**; salve-a em `output/completed-interior.png`.
-4. Gere a imagem **antes da construção** com **GPT Image**, usando o prompt abaixo, e salve
+4. Gere a imagem **antes da construçêo** com **GPT Image**, usando o prompt abaixo, e salve
    em `output/before-construction.png`.
-5. **Portão de consistência** — compare as duas: mesma câmera, mesmas paredes, mesmas
-   aberturas, mesmo pé-direito. Se o layout mudou, **regenere**; não leve um "antes" errado
+5. **Portêo de consistência** — compare as duas: mesma câmera, mesmas paredes, mesmas
+   aberturas, mesmo pé-direito. Se o layout mudou, **regenere**; nêo leve um "antes" errado
    para o vídeo.
 6. Gere o vídeo com **Higgsfield Seedance 2.0 Mini** (Higgsfield MCP), com o "antes" como
    `@image1` e o finalizado como `@image2`, usando o prompt de vídeo abaixo.
-7. Salve em `output/renovation-video.mp4` e confira com `ffprobe` (dimensão e duração reais,
-   não o JSON da resposta).
+7. Salve em `output/renovation-video.mp4` e confira com `ffprobe` (dimensêo e duraçêo reais,
+   nêo o JSON da resposta).
 
 Atalho: `python3 skills/higgsfield/rodar.py` prepara os arquivos e escreve os dois handoffs
 (`output/HANDOFF-imagem.md`, `output/HANDOFF-video.md`) com prompts e caminhos preenchidos.
 
 Sistema independente: `rodar.py` + `prompts.py` próprios nesta pasta.
 
-## Prompt — imagem antes da construção
+## Prompt — imagem antes da construçêo
 
 Create a photorealistic before-construction version of the submitted completed interior.
 
