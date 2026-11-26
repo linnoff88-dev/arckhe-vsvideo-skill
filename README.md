@@ -2,7 +2,7 @@
 
 ## ê°Å¸ââ Guia de uso
 
-Guia completo (landing + passo a passo): **https://inematds.github.io/vsvideo-skill/guia/**
+Guia completo (landing + passo a passo): **https://linnoff88-dev.github.io/arckhe-/guia/**
 
 ---
 
@@ -154,7 +154,7 @@ LAYOUT="one large window on the whole left wall, blank back wall with no opening
 
 ---
 
-INEMA êÂ· [inema.club](https://inema.club)
+ARCKHÉ êÂ· [ARCKHÉ AI](https://ARCKHÉ AI)
 
 ---
 
